@@ -207,6 +207,7 @@ Partial Class frmCalculator
         Me.txtNumBox.BackColor = System.Drawing.Color.PeachPuff
         Me.txtNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNumBox.Location = New System.Drawing.Point(21, 43)
+        Me.txtNumBox.MaxLength = 13
         Me.txtNumBox.Name = "txtNumBox"
         Me.txtNumBox.Size = New System.Drawing.Size(215, 38)
         Me.txtNumBox.TabIndex = 16
