@@ -38,7 +38,7 @@ Partial Class frmCalculator
         Me.btnPlus = New System.Windows.Forms.Button()
         Me.btnMinus = New System.Windows.Forms.Button()
         Me.btnEqual = New System.Windows.Forms.Button()
-        Me.TextBox1 = New System.Windows.Forms.TextBox()
+        Me.txtNumBox = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'btn7
@@ -202,22 +202,22 @@ Partial Class frmCalculator
         Me.btnEqual.Text = "="
         Me.btnEqual.UseVisualStyleBackColor = False
         '
-        'TextBox1
+        'txtNumBox
         '
-        Me.TextBox1.BackColor = System.Drawing.Color.PeachPuff
-        Me.TextBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 24.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TextBox1.Location = New System.Drawing.Point(21, 43)
-        Me.TextBox1.Name = "TextBox1"
-        Me.TextBox1.Size = New System.Drawing.Size(215, 44)
-        Me.TextBox1.TabIndex = 16
-        Me.TextBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
+        Me.txtNumBox.BackColor = System.Drawing.Color.PeachPuff
+        Me.txtNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtNumBox.Location = New System.Drawing.Point(21, 43)
+        Me.txtNumBox.Name = "txtNumBox"
+        Me.txtNumBox.Size = New System.Drawing.Size(215, 38)
+        Me.txtNumBox.TabIndex = 16
+        Me.txtNumBox.TextAlign = System.Windows.Forms.HorizontalAlignment.Right
         '
         'frmCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(261, 358)
-        Me.Controls.Add(Me.TextBox1)
+        Me.Controls.Add(Me.txtNumBox)
         Me.Controls.Add(Me.btnEqual)
         Me.Controls.Add(Me.btnMinus)
         Me.Controls.Add(Me.btnPlus)
@@ -234,6 +234,7 @@ Partial Class frmCalculator
         Me.Controls.Add(Me.btn9)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btn7)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Name = "frmCalculator"
         Me.Text = "My Calculator"
         Me.ResumeLayout(False)
@@ -257,5 +258,5 @@ Partial Class frmCalculator
     Friend WithEvents btnPlus As Button
     Friend WithEvents btnMinus As Button
     Friend WithEvents btnEqual As Button
-    Friend WithEvents TextBox1 As TextBox
+    Friend WithEvents txtNumBox As TextBox
 End Class
