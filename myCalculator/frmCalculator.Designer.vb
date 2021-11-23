@@ -217,7 +217,7 @@ Partial Class frmCalculator
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(261, 358)
+        Me.ClientSize = New System.Drawing.Size(263, 344)
         Me.Controls.Add(Me.txtNumBox)
         Me.Controls.Add(Me.btnEqual)
         Me.Controls.Add(Me.btnMinus)
@@ -235,7 +235,7 @@ Partial Class frmCalculator
         Me.Controls.Add(Me.btn9)
         Me.Controls.Add(Me.btnClear)
         Me.Controls.Add(Me.btn7)
-        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow
         Me.Name = "frmCalculator"
         Me.Text = "My Calculator"
         Me.ResumeLayout(False)

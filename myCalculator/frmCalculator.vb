@@ -2,16 +2,18 @@
     ' Universal Variable
     Private number As String
     Private operation As String
-    Private value As Integer
+    Private value As Decimal
+    Private operationBefore As String = ""
 
     ' Auto select textbox for user input
     Private Sub frmCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtNumBox.Select()
     End Sub
 
-    ' Handle user input restrictions
+    ' Handle user input validation
     Private Sub txtNumBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumBox.KeyPress
         Dim character As String = e.KeyChar
+        ' MessageBox.Show(character)
 
         Select Case character
             Case "+"
@@ -22,84 +24,66 @@
                 btnMultiply_Click(sender, e)
             Case "/"
                 btnDivide_Click(sender, e)
-            Case "="
-                btnEqual_Click(sender, e)
         End Select
 
-        If e.KeyChar = ChrW(Keys.Delete) Then btnClear_Click(sender, e)
-        If e.KeyChar = ChrW(Keys.Enter) Then btnEqual_Click(sender, e)
+        If character = ChrW(Keys.Enter) Then
+            btnEqual_Click(sender, e)
+        End If
 
-        If Not Char.IsNumber(e.KeyChar) And Not e.KeyChar = ChrW(Keys.Back) Then
+        If Not Char.IsNumber(character) And Not character = ChrW(Keys.Back) Then
             e.Handled = True
         End If
-    End Sub
 
-    ' Button Click
-    Private Sub btn0_Click(sender As Object, e As EventArgs) Handles btn0.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 0
+        If Char.IsNumber(character) Then
+            If operation = "=" Then btnClear_Click(sender, e)
         End If
     End Sub
 
-    Private Sub btn1_Click(sender As Object, e As EventArgs) Handles btn1.Click
+    Private Sub txtNumBox_KeyUp(sender As Object, e As KeyEventArgs) Handles txtNumBox.KeyUp
+        If e.KeyCode = Keys.Delete Then btnClear_Click(sender, e)
+    End Sub
+
+    ' Handle button click event for numeric button
+    Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn0.Click, btn1.Click, btn2.Click, btn3.Click,
+            btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
+
+        If operation = "=" Then btnClear_Click(sender, e)
+
         If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 1
+            Select Case DirectCast(sender, Button).Name
+                Case "btn0"
+                    txtNumBox.Text = txtNumBox.Text & 0
+                Case "btn1"
+                    txtNumBox.Text = txtNumBox.Text & 1
+                Case "btn2"
+                    txtNumBox.Text = txtNumBox.Text & 2
+                Case "btn3"
+                    txtNumBox.Text = txtNumBox.Text & 3
+                Case "btn4"
+                    txtNumBox.Text = txtNumBox.Text & 4
+                Case "btn5"
+                    txtNumBox.Text = txtNumBox.Text & 5
+                Case "btn6"
+                    txtNumBox.Text = txtNumBox.Text & 6
+                Case "btn7"
+                    txtNumBox.Text = txtNumBox.Text & 7
+                Case "btn8"
+                    txtNumBox.Text = txtNumBox.Text & 8
+                Case "btn9"
+                    txtNumBox.Text = txtNumBox.Text & 9
+            End Select
         End If
     End Sub
 
-    Private Sub btn2_Click(sender As Object, e As EventArgs) Handles btn2.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 2
-        End If
-    End Sub
-
-    Private Sub btn3_Click(sender As Object, e As EventArgs) Handles btn3.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 3
-        End If
-    End Sub
-
-    Private Sub btn4_Click(sender As Object, e As EventArgs) Handles btn4.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 4
-        End If
-    End Sub
-
-    Private Sub btn5_Click(sender As Object, e As EventArgs) Handles btn5.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 5
-        End If
-    End Sub
-
-    Private Sub btn6_Click(sender As Object, e As EventArgs) Handles btn6.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 6
-        End If
-    End Sub
-
-    Private Sub btn7_Click(sender As Object, e As EventArgs) Handles btn7.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 7
-        End If
-    End Sub
-
-    Private Sub btn8_Click(sender As Object, e As EventArgs) Handles btn8.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 8
-        End If
-    End Sub
-
-    Private Sub btn9_Click(sender As Object, e As EventArgs) Handles btn9.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 9
-        End If
-    End Sub
-
+    ' Clear Button
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         txtNumBox.Clear()
         number = ""
+        operation = ""
+        operationBefore = ""
     End Sub
 
+    ' Arithmethic calculation button
     Private Sub btnPlus_Click(sender As Object, e As EventArgs) Handles btnPlus.Click
         value = Val(number)
         If number = "" Then
@@ -157,16 +141,27 @@
         End If
     End Sub
 
+    ' Equal button
     Private Sub btnEqual_Click(sender As Object, e As EventArgs) Handles btnEqual.Click
         value = Val(number)
-        calc()
-        txtNumBox.Text = number
+
+        If operationBefore <> "" And operation = "=" Then
+            operation = operationBefore
+            calc()
+            display()
+            operation = "="
+        Else
+            calc()
+            display()
+            number = txtNumBox.Text
+            operationBefore = operation
+            operation = "="
+        End If
     End Sub
 
     ' Calculation
     Sub calc()
         value = Val(number)
-
         Try
             Select Case operation
                 Case "+"
@@ -185,5 +180,21 @@
         Catch ex As OverflowException
             MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
+    End Sub
+
+    ' Output validation
+    Sub display()
+        If number.Length < 13 Then
+            txtNumBox.Text = number
+        Else
+            txtNumBox.Text = Format(Val(number), "e")
+            MessageBox.Show(Me, "Output out of bound", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            'clear the output
+            txtNumBox.Clear()
+            number = ""
+            operation = ""
+            operationBefore = ""
+        End If
     End Sub
 End Class
