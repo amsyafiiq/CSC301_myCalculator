@@ -2,7 +2,7 @@
     ' Universal Variable
     Private number As String
     Private operation As String
-    Private value As Integer
+    Private value As Decimal
 
     ' Auto select textbox for user input
     Private Sub frmCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
@@ -37,6 +37,8 @@
     ' Handle button click event for numeric button
     Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn0.Click, btn1.Click, btn2.Click, btn3.Click,
             btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
+
+        If operation = "=" Then btnClear_Click(sender, e)
 
         If txtNumBox.TextLength < 13 Then
             Select Case DirectCast(sender, Button).Name
@@ -130,6 +132,8 @@
         value = Val(number)
         calc()
         txtNumBox.Text = number
+        number = ""
+        operation = "="
     End Sub
 
     ' Calculation
