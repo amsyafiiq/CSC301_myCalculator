@@ -4,8 +4,31 @@
     Private operation As String
     Private value As Integer
 
-    ' Disable non-numeric character input
+    ' Auto select textbox for user input
+    Private Sub frmCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
+        txtNumBox.Select()
+    End Sub
+
+    ' Handle user input restrictions
     Private Sub txtNumBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumBox.KeyPress
+        Dim character As String = e.KeyChar
+
+        Select Case character
+            Case "+"
+                btnPlus_Click(sender, e)
+            Case "-"
+                btnMinus_Click(sender, e)
+            Case "*"
+                btnMultiply_Click(sender, e)
+            Case "/"
+                btnDivide_Click(sender, e)
+            Case "="
+                btnEqual_Click(sender, e)
+        End Select
+
+        If e.KeyChar = ChrW(Keys.Delete) Then btnClear_Click(sender, e)
+        If e.KeyChar = ChrW(Keys.Enter) Then btnEqual_Click(sender, e)
+
         If Not Char.IsNumber(e.KeyChar) And Not e.KeyChar = ChrW(Keys.Back) Then
             e.Handled = True
         End If
@@ -117,6 +140,7 @@
             txtNumBox.Clear()
             operation = "*"
         End If
+
     End Sub
 
     Private Sub btnDivide_Click(sender As Object, e As EventArgs) Handles btnDivide.Click
@@ -142,19 +166,24 @@
     ' Calculation
     Sub calc()
         value = Val(number)
-        Select Case operation
-            Case "+"
-                value += Val(txtNumBox.Text)
-                number = value
-            Case "-"
-                value -= Val(txtNumBox.Text)
-                number = value
-            Case "*"
-                value *= Val(txtNumBox.Text)
-                number = value
-            Case "/"
-                value /= Val(txtNumBox.Text)
-                number = value
-        End Select
+
+        Try
+            Select Case operation
+                Case "+"
+                    value += Val(txtNumBox.Text)
+                    number = value
+                Case "-"
+                    value -= Val(txtNumBox.Text)
+                    number = value
+                Case "*"
+                    value *= Val(txtNumBox.Text)
+                    number = value
+                Case "/"
+                    value /= Val(txtNumBox.Text)
+                    number = value
+            End Select
+        Catch ex As OverflowException
+            MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+        End Try
     End Sub
 End Class
