@@ -3,16 +3,17 @@
     Private number As String
     Private operation As String
     Private value As Decimal
+    Private operationBefore As String = ""
 
     ' Auto select textbox for user input
     Private Sub frmCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         txtNumBox.Select()
     End Sub
 
-    ' Handle user input restrictions
+    ' Handle user input validation
     Private Sub txtNumBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumBox.KeyPress
         Dim character As String = e.KeyChar
-
+        ' MessageBox.Show(character)
 
         Select Case character
             Case "+"
@@ -25,12 +26,21 @@
                 btnDivide_Click(sender, e)
         End Select
 
-        If character = ChrW(Keys.Enter) Then btnEqual_Click(sender, e)
-        If character.ToLower.Equals("c") Then btnClear_Click(sender, e)
+        If character = ChrW(Keys.Enter) Then
+            btnEqual_Click(sender, e)
+        End If
 
         If Not Char.IsNumber(character) And Not character = ChrW(Keys.Back) Then
             e.Handled = True
         End If
+
+        If Char.IsNumber(character) Then
+            If operation = "=" Then btnClear_Click(sender, e)
+        End If
+    End Sub
+
+    Private Sub txtNumBox_KeyUp(sender As Object, e As KeyEventArgs) Handles txtNumBox.KeyUp
+        If e.KeyCode = Keys.Delete Then btnClear_Click(sender, e)
     End Sub
 
     ' Handle button click event for numeric button
@@ -38,7 +48,6 @@
             btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
 
         If operation = "=" Then btnClear_Click(sender, e)
-
 
         If txtNumBox.TextLength < 13 Then
             Select Case DirectCast(sender, Button).Name
@@ -71,8 +80,10 @@
         txtNumBox.Clear()
         number = ""
         operation = ""
+        operationBefore = ""
     End Sub
 
+    ' Arithmethic calculation button
     Private Sub btnPlus_Click(sender As Object, e As EventArgs) Handles btnPlus.Click
         value = Val(number)
         If number = "" Then
@@ -130,12 +141,22 @@
         End If
     End Sub
 
+    ' Equal button
     Private Sub btnEqual_Click(sender As Object, e As EventArgs) Handles btnEqual.Click
         value = Val(number)
-        calc()
-        txtNumBox.Text = number
-        number = ""
-        operation = "="
+
+        If operationBefore <> "" And operation = "=" Then
+            operation = operationBefore
+            calc()
+            display()
+            operation = "="
+        Else
+            calc()
+            display()
+            number = txtNumBox.Text
+            operationBefore = operation
+            operation = "="
+        End If
     End Sub
 
     ' Calculation
@@ -159,5 +180,21 @@
         Catch ex As OverflowException
             MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
+    End Sub
+
+    ' Output validation
+    Sub display()
+        If number.Length < 13 Then
+            txtNumBox.Text = number
+        Else
+            txtNumBox.Text = Format(Val(number), "e")
+            MessageBox.Show(Me, "Output out of bound", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+
+            'clear the output
+            txtNumBox.Clear()
+            number = ""
+            operation = ""
+            operationBefore = ""
+        End If
     End Sub
 End Class
