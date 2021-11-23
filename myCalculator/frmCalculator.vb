@@ -13,6 +13,7 @@
     Private Sub txtNumBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumBox.KeyPress
         Dim character As String = e.KeyChar
 
+
         Select Case character
             Case "+"
                 btnPlus_Click(sender, e)
@@ -22,14 +23,12 @@
                 btnMultiply_Click(sender, e)
             Case "/"
                 btnDivide_Click(sender, e)
-            Case "="
-                btnEqual_Click(sender, e)
         End Select
 
-        If e.KeyChar = ChrW(Keys.Delete) Then btnClear_Click(sender, e)
-        If e.KeyChar = ChrW(Keys.Enter) Then btnEqual_Click(sender, e)
+        If character = ChrW(Keys.Enter) Then btnEqual_Click(sender, e)
+        If character.ToLower.Equals("c") Then btnClear_Click(sender, e)
 
-        If Not Char.IsNumber(e.KeyChar) And Not e.KeyChar = ChrW(Keys.Back) Then
+        If Not Char.IsNumber(character) And Not character = ChrW(Keys.Back) Then
             e.Handled = True
         End If
     End Sub
@@ -39,6 +38,7 @@
             btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
 
         If operation = "=" Then btnClear_Click(sender, e)
+
 
         If txtNumBox.TextLength < 13 Then
             Select Case DirectCast(sender, Button).Name
@@ -66,9 +66,11 @@
         End If
     End Sub
 
+    ' Clear Button
     Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
         txtNumBox.Clear()
         number = ""
+        operation = ""
     End Sub
 
     Private Sub btnPlus_Click(sender As Object, e As EventArgs) Handles btnPlus.Click
