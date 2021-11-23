@@ -34,64 +34,33 @@
         End If
     End Sub
 
-    ' Button Click
-    Private Sub btn0_Click(sender As Object, e As EventArgs) Handles btn0.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 0
-        End If
-    End Sub
+    ' Handle button click event for numeric button
+    Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn0.Click, btn1.Click, btn2.Click, btn3.Click,
+            btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
 
-    Private Sub btn1_Click(sender As Object, e As EventArgs) Handles btn1.Click
         If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 1
-        End If
-    End Sub
-
-    Private Sub btn2_Click(sender As Object, e As EventArgs) Handles btn2.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 2
-        End If
-    End Sub
-
-    Private Sub btn3_Click(sender As Object, e As EventArgs) Handles btn3.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 3
-        End If
-    End Sub
-
-    Private Sub btn4_Click(sender As Object, e As EventArgs) Handles btn4.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 4
-        End If
-    End Sub
-
-    Private Sub btn5_Click(sender As Object, e As EventArgs) Handles btn5.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 5
-        End If
-    End Sub
-
-    Private Sub btn6_Click(sender As Object, e As EventArgs) Handles btn6.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 6
-        End If
-    End Sub
-
-    Private Sub btn7_Click(sender As Object, e As EventArgs) Handles btn7.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 7
-        End If
-    End Sub
-
-    Private Sub btn8_Click(sender As Object, e As EventArgs) Handles btn8.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 8
-        End If
-    End Sub
-
-    Private Sub btn9_Click(sender As Object, e As EventArgs) Handles btn9.Click
-        If txtNumBox.TextLength < 13 Then
-            txtNumBox.Text = txtNumBox.Text & 9
+            Select Case DirectCast(sender, Button).Name
+                Case "btn0"
+                    txtNumBox.Text = txtNumBox.Text & 0
+                Case "btn1"
+                    txtNumBox.Text = txtNumBox.Text & 1
+                Case "btn2"
+                    txtNumBox.Text = txtNumBox.Text & 2
+                Case "btn3"
+                    txtNumBox.Text = txtNumBox.Text & 3
+                Case "btn4"
+                    txtNumBox.Text = txtNumBox.Text & 4
+                Case "btn5"
+                    txtNumBox.Text = txtNumBox.Text & 5
+                Case "btn6"
+                    txtNumBox.Text = txtNumBox.Text & 6
+                Case "btn7"
+                    txtNumBox.Text = txtNumBox.Text & 7
+                Case "btn8"
+                    txtNumBox.Text = txtNumBox.Text & 8
+                Case "btn9"
+                    txtNumBox.Text = txtNumBox.Text & 9
+            End Select
         End If
     End Sub
 
@@ -166,7 +135,6 @@
     ' Calculation
     Sub calc()
         value = Val(number)
-
         Try
             Select Case operation
                 Case "+"
