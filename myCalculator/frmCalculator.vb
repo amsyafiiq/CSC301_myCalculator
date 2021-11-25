@@ -10,6 +10,7 @@
             btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
 
         If operation = "=" Then btnClear_Click(sender, e)
+        If operationBefore = "=" Then txtNumBox.Clear()
 
         If txtNumBox.TextLength < 13 Then
             Select Case DirectCast(sender, Button).Name
@@ -35,6 +36,8 @@
                     txtNumBox.Text = txtNumBox.Text & 9
             End Select
         End If
+
+        operationBefore = ""
     End Sub
 
     ' Clear Button
@@ -48,58 +51,70 @@
     ' Arithmethic calculation button
     Private Sub btnPlus_Click(sender As Object, e As EventArgs) Handles btnPlus.Click
         value = Val(number)
+        'If operationBefore = "=" Then txtNumBox.Clear()
+
         If number = "" Then
             number = Val(txtNumBox.Text)
             txtNumBox.Clear()
             operation = "+"
         Else
             calc()
+            If operation <> "=" Then display() Else txtNumBox.Clear()
             number = value
-            txtNumBox.Clear()
             operation = "+"
+            operationBefore = "="
         End If
     End Sub
 
     Private Sub btnMinus_Click(sender As Object, e As EventArgs) Handles btnMinus.Click
         value = Val(number)
+        If operation = "=" Then txtNumBox.Clear()
+
         If number = "" Then
             number = Val(txtNumBox.Text)
             txtNumBox.Clear()
             operation = "-"
         Else
             calc()
+            If operation <> "=" Then display() Else txtNumBox.Clear()
             number = value
-            txtNumBox.Clear()
             operation = "-"
+            operationBefore = "="
         End If
     End Sub
 
     Private Sub btnMultiply_Click(sender As Object, e As EventArgs) Handles btnMultiply.Click
         value = Val(number)
+        If operation = "=" Then txtNumBox.Clear()
+
         If number = "" Then
             number = Val(txtNumBox.Text)
             txtNumBox.Clear()
             operation = "*"
         Else
             calc()
+            If operation <> "=" Then display() Else txtNumBox.Clear()
             number = value
-            txtNumBox.Clear()
             operation = "*"
+            operationBefore = "="
         End If
 
     End Sub
 
     Private Sub btnDivide_Click(sender As Object, e As EventArgs) Handles btnDivide.Click
         value = Val(number)
+        If operation = "=" Then txtNumBox.Clear()
+
         If number = "" Then
             number = Val(txtNumBox.Text)
             txtNumBox.Clear()
             operation = "/"
         Else
             calc()
+            If operation <> "=" Then display() Else txtNumBox.Clear()
             number = value
-            txtNumBox.Clear()
             operation = "/"
+            operationBefore = "="
         End If
     End Sub
 
@@ -149,14 +164,7 @@
         If number.Length < 13 Then
             txtNumBox.Text = number
         Else
-            txtNumBox.Text = Format(Val(number), "e")
-            MessageBox.Show(Me, "Output out of Bound", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
-
-            'clear the output
-            txtNumBox.Clear()
-            number = ""
-            operation = ""
-            operationBefore = ""
+            txtNumBox.Text = number.Substring(0, 13)
         End If
     End Sub
 End Class

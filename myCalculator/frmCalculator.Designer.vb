@@ -205,7 +205,7 @@ Partial Class frmCalculator
         'txtNumBox
         '
         Me.txtNumBox.BackColor = System.Drawing.Color.PeachPuff
-        Me.txtNumBox.Cursor = System.Windows.Forms.Cursors.Default
+        Me.txtNumBox.Cursor = System.Windows.Forms.Cursors.Arrow
         Me.txtNumBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 20.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtNumBox.Location = New System.Drawing.Point(21, 43)
         Me.txtNumBox.MaxLength = 13
