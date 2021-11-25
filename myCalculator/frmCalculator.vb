@@ -177,7 +177,7 @@
                     value /= Val(txtNumBox.Text)
                     number = value
             End Select
-        Catch ex As OverflowException
+        Catch ex As Exception
             MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
     End Sub
@@ -188,7 +188,7 @@
             txtNumBox.Text = number
         Else
             txtNumBox.Text = Format(Val(number), "e")
-            MessageBox.Show(Me, "Output out of bound", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
+            MessageBox.Show(Me, "Output out of Bound", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
 
             'clear the output
             txtNumBox.Clear()
