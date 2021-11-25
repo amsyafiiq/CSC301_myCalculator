@@ -5,44 +5,6 @@
     Private value As Decimal
     Private operationBefore As String = ""
 
-    ' Auto select textbox for user input
-    Private Sub frmCalculator_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        txtNumBox.Select()
-    End Sub
-
-    ' Handle user input validation
-    Private Sub txtNumBox_KeyPress(sender As Object, e As KeyPressEventArgs) Handles txtNumBox.KeyPress
-        Dim character As String = e.KeyChar
-        ' MessageBox.Show(character)
-
-        Select Case character
-            Case "+"
-                btnPlus_Click(sender, e)
-            Case "-"
-                btnMinus_Click(sender, e)
-            Case "*"
-                btnMultiply_Click(sender, e)
-            Case "/"
-                btnDivide_Click(sender, e)
-        End Select
-
-        If character = ChrW(Keys.Enter) Then
-            btnEqual_Click(sender, e)
-        End If
-
-        If Not Char.IsNumber(character) And Not character = ChrW(Keys.Back) Then
-            e.Handled = True
-        End If
-
-        If Char.IsNumber(character) Then
-            If operation = "=" Then btnClear_Click(sender, e)
-        End If
-    End Sub
-
-    Private Sub txtNumBox_KeyUp(sender As Object, e As KeyEventArgs) Handles txtNumBox.KeyUp
-        If e.KeyCode = Keys.Delete Then btnClear_Click(sender, e)
-    End Sub
-
     ' Handle button click event for numeric button
     Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn0.Click, btn1.Click, btn2.Click, btn3.Click,
             btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
