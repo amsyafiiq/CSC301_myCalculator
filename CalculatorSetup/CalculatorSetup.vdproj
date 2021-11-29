@@ -231,6 +231,7 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:MyCalculator"
+         button-input-only
         "ProductCode" = "8:{6DBD10ED-D5D0-4FBA-9C65-7091B3A0F70C}"
         "PackageCode" = "8:{2A5626D8-E4D5-4E90-A77F-BCBB97A2CEC3}"
         "UpgradeCode" = "8:{244AD07A-D257-44C8-9A16-CF9322AB65DB}"
