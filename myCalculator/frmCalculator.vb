@@ -53,30 +53,28 @@
         If operation = "=" Then btnClear_Click(sender, e)
         If operationBefore = "=" Then txtNumBox.Clear()
 
-        If txtNumBox.TextLength < 13 Then
-            Select Case DirectCast(sender, Button).Name
-                Case "btn0"
-                    txtNumBox.Text = txtNumBox.Text & 0
-                Case "btn1"
-                    txtNumBox.Text = txtNumBox.Text & 1
-                Case "btn2"
-                    txtNumBox.Text = txtNumBox.Text & 2
-                Case "btn3"
-                    txtNumBox.Text = txtNumBox.Text & 3
-                Case "btn4"
-                    txtNumBox.Text = txtNumBox.Text & 4
-                Case "btn5"
-                    txtNumBox.Text = txtNumBox.Text & 5
-                Case "btn6"
-                    txtNumBox.Text = txtNumBox.Text & 6
-                Case "btn7"
-                    txtNumBox.Text = txtNumBox.Text & 7
-                Case "btn8"
-                    txtNumBox.Text = txtNumBox.Text & 8
-                Case "btn9"
-                    txtNumBox.Text = txtNumBox.Text & 9
-            End Select
-        End If
+        Select Case DirectCast(sender, Button).Name
+            Case "btn0"
+                numDisplay(0)
+            Case "btn1"
+                numDisplay(1)
+            Case "btn2"
+                numDisplay(2)
+            Case "btn3"
+                numDisplay(3)
+            Case "btn4"
+                numDisplay(4)
+            Case "btn5"
+                numDisplay(5)
+            Case "btn6"
+                numDisplay(6)
+            Case "btn7"
+                numDisplay(7)
+            Case "btn8"
+                numDisplay(8)
+            Case "btn9"
+                numDisplay(9)
+        End Select
 
         operationBefore = ""
     End Sub
