@@ -5,7 +5,7 @@
     Private value As Decimal
     Private operationBefore As String = ""
 
-    ' Handle button click event for numeric button
+    ' Handle button click event for numeric buttons
     Private Sub btn_Click(sender As Object, e As EventArgs) Handles btn0.Click, btn1.Click, btn2.Click, btn3.Click,
             btn4.Click, btn5.Click, btn6.Click, btn7.Click, btn8.Click, btn9.Click
 
