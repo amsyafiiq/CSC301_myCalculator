@@ -40,6 +40,8 @@
         If Char.IsNumber(character) Then
             If operationBefore = "=" Then txtNumBox.Clear()
         End If
+
+        operationBefore = ""
     End Sub
 
     Private Sub txtNumBox_KeyUp(sender As Object, e As KeyEventArgs) Handles txtNumBox.KeyUp
@@ -89,72 +91,19 @@
 
     ' Arithmethic calculation button
     Private Sub btnPlus_Click(sender As Object, e As EventArgs) Handles btnPlus.Click
-        value = Val(number)
-        'If operationBefore = "=" Then txtNumBox.Clear()
-
-        If number = "" Then
-            number = Val(txtNumBox.Text)
-            txtNumBox.Clear()
-            operation = "+"
-        Else
-            calc()
-            If operation <> "=" Then display() Else txtNumBox.Clear()
-            number = value
-            operation = "+"
-            operationBefore = "="
-        End If
+        operatorValidate("+")
     End Sub
 
     Private Sub btnMinus_Click(sender As Object, e As EventArgs) Handles btnMinus.Click
-        value = Val(number)
-        If operation = "=" Then txtNumBox.Clear()
-
-        If number = "" Then
-            number = Val(txtNumBox.Text)
-            txtNumBox.Clear()
-            operation = "-"
-        Else
-            calc()
-            If operation <> "=" Then display() Else txtNumBox.Clear()
-            number = value
-            operation = "-"
-            operationBefore = "="
-        End If
+        operatorValidate("-")
     End Sub
 
     Private Sub btnMultiply_Click(sender As Object, e As EventArgs) Handles btnMultiply.Click
-        value = Val(number)
-        If operation = "=" Then txtNumBox.Clear()
-
-        If number = "" Then
-            number = Val(txtNumBox.Text)
-            txtNumBox.Clear()
-            operation = "*"
-        Else
-            calc()
-            If operation <> "=" Then display() Else txtNumBox.Clear()
-            number = value
-            operation = "*"
-            operationBefore = "="
-        End If
-
+        operatorValidate("*")
     End Sub
 
     Private Sub btnDivide_Click(sender As Object, e As EventArgs) Handles btnDivide.Click
-        value = Val(number)
-        If operation = "=" Then txtNumBox.Clear()
-
-        If number = "" Then
-            number = Val(txtNumBox.Text)
-            txtNumBox.Clear()
-            operation = "/"
-        Else
-            calc()
-            If operation <> "=" Then display() Else txtNumBox.Clear()
-            number = value
-            operation = "/"
-            operationBefore = "="
-        End If
+        operatorValidate("/")
     End Sub
 
     ' Equal button
