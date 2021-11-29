@@ -164,17 +164,18 @@
         If operationBefore <> "" And operation = "=" Then
             operation = operationBefore
             calc()
-            display()
+            displayAnswer()
             operation = "="
         Else
             calc()
-            display()
+            displayAnswer()
             number = txtNumBox.Text
             operationBefore = operation
             operation = "="
         End If
     End Sub
 
+    ' Display and Calculation Subroutine
     ' Calculation
     Sub calc()
         value = Val(number)
@@ -182,28 +183,55 @@
             Select Case operation
                 Case "+"
                     value += Val(txtNumBox.Text)
-                    number = value
                 Case "-"
                     value -= Val(txtNumBox.Text)
-                    number = value
                 Case "*"
                     value *= Val(txtNumBox.Text)
-                    number = value
                 Case "/"
                     value /= Val(txtNumBox.Text)
-                    number = value
             End Select
+            number = value
+
         Catch ex As Exception
             MessageBox.Show(Me, ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning)
         End Try
     End Sub
 
-    ' Output validation
-    Sub display()
+    ' Answer output validation
+    Private Sub displayAnswer()
         If number.Length < 13 Then
             txtNumBox.Text = number
         Else
             txtNumBox.Text = number.Substring(0, 13)
+        End If
+    End Sub
+
+    ' Numeric button input validation
+    Private Sub numDisplay(num As Integer)
+        If txtNumBox.Text = "0" Then
+            txtNumBox.Text = String.Empty
+        End If
+
+        If txtNumBox.TextLength < 13 Then
+            txtNumBox.Text = txtNumBox.Text & num
+        End If
+    End Sub
+
+    ' Calculation button input validation
+    Private Sub operatorValidate(ByVal operators As String)
+        value = Val(number)
+        If operation = "=" Then txtNumBox.Clear()
+
+        If number = "" Then
+            number = Val(txtNumBox.Text)
+            txtNumBox.Clear()
+            operation = operators
+        Else
+            calc()
+            If operation <> "=" Then displayAnswer() Else txtNumBox.Clear()
+            number = value
+            operation = operators
+            operationBefore = "="
         End If
     End Sub
 End Class
