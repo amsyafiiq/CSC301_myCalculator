@@ -38,29 +38,18 @@
         operationBefore = ""
     End Sub
 
-    ' Clear Button
-    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
-        txtNumBox.Clear()
-        number = ""
-        operation = ""
-        operationBefore = ""
-    End Sub
-
     ' Arithmethic calculation button
-    Private Sub btnPlus_Click(sender As Object, e As EventArgs) Handles btnPlus.Click
-        operatorValidate("+")
-    End Sub
-
-    Private Sub btnMinus_Click(sender As Object, e As EventArgs) Handles btnMinus.Click
-        operatorValidate("-")
-    End Sub
-
-    Private Sub btnMultiply_Click(sender As Object, e As EventArgs) Handles btnMultiply.Click
-        operatorValidate("*")
-    End Sub
-
-    Private Sub btnDivide_Click(sender As Object, e As EventArgs) Handles btnDivide.Click
-        operatorValidate("/")
+    Private Sub btnCal_Click(sender As Object, e As EventArgs) Handles btnPlus.Click, btnMinus.Click, btnMultiply.Click, btnDivide.Click
+        Select Case DirectCast(sender, Button).Name
+            Case "btnPlus"
+                operatorValidate("+")
+            Case "btnMinus"
+                operatorValidate("-")
+            Case "btnMultiply"
+                operatorValidate("*")
+            Case "btnDivide"
+                operatorValidate("/")
+        End Select
     End Sub
 
     ' Equal button
@@ -81,6 +70,13 @@
         End If
     End Sub
 
+    ' Clear Button
+    Private Sub btnClear_Click(sender As Object, e As EventArgs) Handles btnClear.Click
+        txtNumBox.Clear()
+        number = ""
+        operation = ""
+        operationBefore = ""
+    End Sub
 
     ' Display and Calculation Subroutine
     ' Calculation
@@ -114,7 +110,7 @@
     End Sub
 
     ' Numeric button input validation
-    Private Sub numDisplay(num As Integer)
+    Private Sub numDisplay(ByVal num As Integer)
         If txtNumBox.Text = "0" Then
             txtNumBox.Text = String.Empty
         End If
