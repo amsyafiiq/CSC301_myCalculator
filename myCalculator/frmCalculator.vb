@@ -1,5 +1,5 @@
 ﻿Public Class frmCalculator
-    ' Universal Variable
+    ' Universal
     Private number As String
     Private operation As String
     Private value As Decimal
